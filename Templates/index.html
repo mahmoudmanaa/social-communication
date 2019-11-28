@@ -1,0 +1,36 @@
+<!D OCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Posty</title>
+</head>
+<body>
+    <header>
+        <h1 style='color:rgb(54, 65, 212);'>Posty</h1>
+        <nav>
+            <a href="{{ url_for('post_add')}}">New</a>
+        </nav>
+    </header>
+    <main>
+        {% for post in posts %}
+        <article>
+            <div>
+                <img src="{{post.photo_url}}">
+            </div>
+            <div>
+                    <h2>{{post.name}}</h2>
+                    <p>{{post.body}}</p>
+                    <div>
+                        <a href="edit">Edit</a> |
+                        <a href="delete">Delete</a>
+                    </div>
+            </div>
+        </article>
+        {% endfor %}
+    </main>
+
+</body>
+</html>
