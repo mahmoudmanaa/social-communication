@@ -8,6 +8,7 @@ class Post:
 posts = []
 
 class PostStore:
+
     def get_all(self):
         # get all posts
         return posts
@@ -15,41 +16,26 @@ class PostStore:
     def add(self, post):
         # append post
         posts.append(post)
+        return posts
+
 
     def get_by_id(self, id):
-        # search for post by id
+        # search for post by id - id البحث عن منشور بالمعرف
         result = None
-
         for post in posts:
             if post.id == id:
                 result = post
                 break
-
         return result
 
-    def update(self, id, fields):
-       # update post data
-       instance = self.get_by_id(id)
+    def update(self,id,fields):
+        post = self.get_by_id(id)
+        post.name = fields["name"]
+        post.photo_url = fields["photo_url"]
+        post.body =fields["body"]
+        return post
 
-       instance.photo_url = fields['photo_url']
-       instance.name = fields['name']
-       instance.body = fields['body']
-
-    def delete(self, id):
-        # delete post by id
-        instance = self.get_by_id(id)
-        posts.remove(instance)
-post1 = Post(id=1,
-         photo_url='https://images.pexels.com/photos/415829/pexels-photo-415829.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=50&w=50',
-         name='Sara',
-         body='Lorem Ipsum')
-post2 = Post(id=2,
-         photo_url='https://images.pexels.com/photos/736716/pexels-photo-736716.jpeg?auto=compress&cs=tinysrgb&dpr=1&h=100&w=100',
-         name='John',
-         body='Lorem Ipsum')
-print(post1.name)
-store = PostStore()
-store.add(post1)
-store.add(post2)
-print(store.get_by_id(1).name)
-
+    def delete(self,id):
+        post = self.get_by_id(id)
+        posts.remove(post)
+        return posts
